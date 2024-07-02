@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "![Estoes](assets/images/logo.png \"Esto es Agencia Digital\")\r # Backend challenge\r * Se debe crear un servicio que maneje los datos de la plataforma de gestión de proyectos.\r * Si bien no hay restricción de tiempo, creemos que de 3 a 5 horas es un tiempo razonable para entregarlo con calidad.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "build": "node index.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
