@@ -1,0 +1,198 @@
+paths:
+  /api/proyects/:
+    get:
+      summary: Obtiene todos los proyectos
+      tags:
+        - Proyects
+      responses:
+        "200":
+          description: Los proyectos fueron devueltos correctamente
+          content:
+            application/json:
+              schema:
+                type: Array
+                items:
+                  $ref: '#/components/schemas/Proyect'
+        "500":
+          description: Ocurrio un error en el servidor
+
+    post:
+      summary: Crea un nuevo proyecto
+      tags:
+        - Proyects
+      requestBody:
+        description: Información del proyecto creado
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/createProyect'
+              type: object
+      responses:
+        "201":
+          description: proyecto creado
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Proyect'
+        "400":
+          description: Error en validaciones              
+        "500":
+          description: Error genérico
+
+  /api/proyects/{id}:
+    get:
+      summary: Obtiene un proyecto por su id
+      tags:
+        - Proyects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id del proyecto a buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: proyecto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Proyect'
+        "404":
+          description: No se encontro el proyecto
+    properties:
+      sumary: Crea un nuevo proyecto
+      tags:
+        - Proyects
+
+    put:
+      summary: actualiza un proyecto a partir de su id
+      tags:
+        - Proyects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id del proyecto a buscar
+          schema:
+            $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/updateProyect'
+      responses:
+        "200":
+          description: proyecto actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Proyect'
+        "404":
+          description: No se encontro el proyecto
+
+    delete:
+      summary: elimina un proyecto a partir de su id
+      tags:
+        - Proyects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id del proyecto a buscar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: proyecto eliminado
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Proyect'
+        "404":
+          description: No se encontro el proyecto
+
+components:
+  schemas:
+    Proyect:
+      type: object
+      properties:
+        id:
+          type: ObjectId
+          description: Id autogenerado de mysql
+        name:
+          type: String
+          description: Nombre del proyecto
+        description:
+          type: String
+          description: Descripción del proyecto
+        proyectManager:
+          type: String
+          description: Proyect Manager del proyecto
+        assignedTo:
+          type: String
+          description: Persona asignada al proyecto
+        status:
+          type: String
+          description: Estado del proyecto
+      example:
+        id: ObjectId("xxxxx")
+        name: Mi 1er proyecto
+        description: Proyecto a realizar por el para el área de ventas de x compañía
+        proyectManager: Carlos Calvo
+        assignedTo: Rubén Rada
+        status: enabled
+        
+  requestBodies:
+    createProyect:
+      type: object
+      properties:
+        name:
+          type: String
+          description: Nombre del proyecto
+        description:
+          type: String
+          description: Descripción del proyecto
+        proyectManager:
+          type: String
+          description: Proyect Manager del proyecto
+        assignedTo:
+          type: String
+          description: Persona asignada al proyecto
+        status:
+          type: String
+          description: Estado del proyecto
+      example:
+        name: Creación del proyecto
+        description: Proyecto a realizar por el para el área de ventas de x compañía
+        proyectManager: Carlos Calvo
+        assignedTo: Rubén Rada
+        status: enabled
+
+    updateProyect:
+      type: object
+      properties:
+        name:
+          type: String
+          description: Nombre del proyecto
+        description:
+          type: String
+          description: Descripción del proyecto
+        proyectManager:
+          type: String
+          description: Proyect Manager del proyecto
+        assignedTo:
+          type: String
+          description: Persona asignada al proyecto
+        status:
+          type: String
+          description: Estado del proyecto
+      example:
+        id: ObjectId("xxxxx")
+        name: Edición del proyecto
+        description: Proyecto a realizar por el para el área de ventas de x compañía
+        proyectManager: Carlos Calvo
+        assignedTo: Rubén Rada
+        status: enabled
